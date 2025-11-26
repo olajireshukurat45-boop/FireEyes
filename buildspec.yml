@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing Maven
+      - yum install -y maven
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn clean package -DskipTests
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - mkdir -p deploy
+      - cp target/*.jar deploy/
+artifacts:
+  files:
+    - deploy/*
